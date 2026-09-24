@@ -113,10 +113,10 @@ setup(
     ext_modules=[CMakeExtension("motion_correction._motion_correction")],
     cmdclass={"build_ext": CMakeBuild},
     zip_safe=False,
-    python_requires=">=3.8",
+    python_requires=">=3.10",
     install_requires=[
-        "torch>=1.10.0",
-        "numpy>=1.19.0",
+        "torch>=2.6.0",
+        "numpy>=1.23,<2",
         # 'cmake' # can install this via pip if the windows system does not have it. But need to run this by yourself before build, not in here.
     ],
 )

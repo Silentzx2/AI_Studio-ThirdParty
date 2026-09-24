@@ -1,10 +1,12 @@
+# Requires Python 3.10 and PyTorch 2.6.0+cu124 (present in active .venv)
+numpy>=1.26.4,<2.0.0
 trimesh==4.5.3
-torch-scatter==2.1.2
 open3d==0.18.0
-numpy==1.22.2
 omegaconf==2.3.0
-flash-attn==2.5.9post1
-spconv
+spconv-cu124>=2.3.6
 safetensors
 easydict
 jaxtyping
+# Prebuilt wheel or compile from source (PyTorch 2.6 + CUDA 12.4):
+torch-scatter>=2.1.2
+flash-attn>=2.7.3

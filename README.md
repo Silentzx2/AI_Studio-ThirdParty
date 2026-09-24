@@ -46,8 +46,14 @@ AI_Studio/
         ├── PartField/
         ├── PartPacker/
         ├── UltraShape/
-        └── VoxHammer/
+        ├── VoxHammer/
+        ├── TripoSF/
+        ├── TripoSG/
+        ├── TripoSR/
+        ├── ardy/
+        └── wheels/
 ```
+
 
 The main backend treats this repository as a **single Git submodule** at `backend/thirdparty`.
 
@@ -104,6 +110,10 @@ Main AI Studio Repo
 | `PartPacker/` | https://github.com/NVlabs/PartPacker | Part-level geometry processing |
 | `UltraShape/` | https://github.com/PKU-YuanGroup/UltraShape-1.0 | Shape refinement / reconstruction |
 | `VoxHammer/` | https://github.com/FishWoWater/VoxHammer | 3D editing and voxel-based processing |
+| `TripoSF/` | https://github.com/VAST-AI-Research/TripoSF | High-resolution sparse voxel 3D shape generation |
+| `TripoSG/` | https://github.com/VAST-AI-Research/TripoSG | Rectified flow image-to-3D shape generation |
+| `TripoSR/` | https://github.com/VAST-AI-Research/TripoSR | Fast feedforward single-image 3D reconstruction |
+| `ardy/` | https://github.com/NVlabs/ardy | Autoregressive diffusion for interactive motion generation |
 
 ---
 
@@ -343,6 +353,14 @@ Depending on the model, the runtime can involve:
 - CMake / Ninja build systems
 
 This is why the repository should be treated as a **versioned dependency bundle** rather than a collection of unrelated folders.
+
+## Prebuilt Wheelhouse (`wheels/`)
+
+To avoid recompiling heavy C++/CUDA native extensions at installation time, precompiled `.whl` binaries targeting **Python 3.10 + PyTorch 2.6.0 + CUDA 12.4** are stored in `wheels/` (tracked via Git LFS).
+
+Detailed build instructions, compiler flags, and source URLs for all native dependencies are documented in [PREBUILD_WHEELS_GUIDE.md](file:///teamspace/studios/this_studio/AI_Studio-ThirdParty/PREBUILD_WHEELS_GUIDE.md).
+
+An automated build script is provided at `scripts/build_wheels_cu124_pt26.sh`.
 
 ---
 
