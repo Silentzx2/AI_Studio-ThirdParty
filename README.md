@@ -1,8 +1,8 @@
 <!-- ===================== HERO BANNER ===================== -->
 
 <p align="center">
-  <img src="https://i.postimg.cc/2ScFBzgs/file-000000006864720bb59405440766bb68-2.jpg" alt="AI 3D Studio Banner" width="100%">
-</p>
+   <img src="assets/banner.png" alt="AI 3D Studio Banner" width="100%">
+ </p>
 
 <h1 align="center">
   AI Studio — Third-Party 3D AI Runtime
