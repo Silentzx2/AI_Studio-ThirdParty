@@ -19,7 +19,7 @@
   <img src="https://img.shields.io/badge/CUDA-12.4-76b900?style=for-the-badge&logo=nvidia&logoColor=white" alt="CUDA 12.4">
   <img src="https://img.shields.io/badge/PyTorch-2.6.0-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch 2.6.0">
   <img src="https://img.shields.io/badge/Python-3.10-3776ab?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.10">
-  <img src="https://img.shields.io/badge/Private-Repository-8b5cf6?style=for-the-badge" alt="Private Repository">
+  <img src="https://img.shields.io/badge/Public-Repository-10b981?style=for-the-badge" alt="Public Repository">
 </p>
 
 ---
@@ -356,11 +356,67 @@ This is why the repository should be treated as a **versioned dependency bundle*
 
 ## Prebuilt Wheelhouse (`wheels/`)
 
-To avoid recompiling heavy C++/CUDA native extensions at installation time, precompiled `.whl` binaries targeting **Python 3.10 + PyTorch 2.6.0 + CUDA 12.4** are stored in `wheels/` (tracked via Git LFS).
+To eliminate hours of complex, error-prone C++/CUDA compilation during setup, this repository ships precompiled `.whl` binaries in the `wheels/` directory (tracked via **Git LFS**).
 
-Detailed build instructions, compiler flags, and source URLs for all native dependencies are documented in [PREBUILD_WHEELS_GUIDE.md](file:///teamspace/studios/this_studio/AI_Studio-ThirdParty/PREBUILD_WHEELS_GUIDE.md).
+### Community & External Project Use
 
-An automated build script is provided at `scripts/build_wheels_cu124_pt26.sh`.
+> [!TIP]
+> **Open for Community Use:**
+> Anyone is welcome to use these prebuilt wheels in their own 3D AI, PyTorch, or computer graphics projects! If you are building tools with TRELLIS, Hunyuan3D, TripoSR, 3D Gaussian Splatting, or custom CUDA pipelines, feel free to download or vendor these binaries to skip manual compilation.
+
+#### Included Wheels
+
+| Package | Version | Primary Role / Used By |
+|---|---|---|
+| `flash_attn` | `2.7.4.post1` | FlashAttention-2 (PyTorch 2.6 + CUDA 12.4, CXX11 ABI False) |
+| `spconv_cu124` | `2.3.8` | Spatial Sparse Convolution for CUDA 12.4 |
+| `diff_gaussian_rasterization` | `0.0.0` | 3D Gaussian Splatting rasterizer |
+| `nvdiffrast` | `0.4.0` | NVIDIA differentiable rasterization library |
+| `nvdiffrec_render` | `0.0.0` | NVIDIA DiffRec render kernels |
+| `cubvh` | `0.1.2` | CUDA Bounding Volume Hierarchy acceleration |
+| `cumesh` | `0.0.1` | CUDA mesh data structures and operations |
+| `diso` | `0.1.4` | Differentiable Isosurfacing |
+| `torch_scatter` | `2.1.2` | PyTorch scatter operations |
+| `torchmcubes` | `0.1.0` | Marching cubes GPU implementation |
+| `fpsample` | `0.3.3` | Farthest Point Sampling |
+| `o_voxel` | `0.0.1` | Octree voxel operations (TRELLIS.2) |
+| `custom_rasterizer` | `0.1` | Custom rasterization kernels |
+| `hy3d_mesh_inpaint_processor` | `0.1.0` | Hunyuan3D mesh inpainting extension |
+
+#### How to Use These Wheels in Your Project
+
+1. **Clone with Git LFS enabled** (mandatory):
+   ```bash
+   git lfs install
+   git clone https://github.com/Silentzx2/AI_Studio-ThirdParty.git
+   cd AI_Studio-ThirdParty/wheels
+   ```
+
+2. **Install all wheels into your Python 3.10 environment**:
+   ```bash
+   pip install *.whl
+   ```
+   *Or install a specific wheel individually:*
+   ```bash
+   pip install flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+   ```
+
+---
+
+### ⚠️ Critical Compatibility Warnings
+
+> [!WARNING]
+> **Strict Platform & Toolchain Requirements:**
+> These binary wheels are compiled for a specific execution matrix and **will NOT work** if your environment differs:
+> - **Operating System:** Linux x86_64 only (glibc / manylinux). Windows and macOS are **not supported**.
+> - **Python Version:** **Python 3.10** (`cp310`). They will fail to install on Python 3.11, 3.12, or 3.9.
+> - **PyTorch & CUDA:** **PyTorch 2.6.0+cu124** with **CUDA 12.4 runtime**. Mismatched PyTorch versions will throw `undefined symbol` or `ABI mismatch` errors on import.
+> - **PyTorch CXX11 ABI:** Compiled with `_GLIBCXX_USE_CXX11_ABI=0` (PyTorch default binary ABI).
+> - **NVIDIA GPU Architectures:** Compute Capability 7.5, 8.0, 8.6, 8.9, 9.0 (Turing, Ampere, Ada Lovelace, Hopper).
+
+> [!CAUTION]
+> **Git LFS Requirement:**
+> The wheels are stored with Git LFS. If you download via standard `git clone` or a zip download without `git-lfs` initialized, you will only receive small ~130-byte text pointer files instead of real `.whl` binaries, causing `pip install` to fail with `not a valid wheel filename` or `bad zipfile`. Always verify `git lfs pull` completed successfully before running `pip install`.
 
 ---
 
@@ -719,7 +775,7 @@ AI_Studio/backend/thirdparty
 
 **Weights:** Managed separately from source whenever possible
 
-**Repository type:** Private dependency bundle
+**Repository type:** Public dependency bundle / submodule
 
 ---
 
