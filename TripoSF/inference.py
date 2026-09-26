@@ -96,7 +96,7 @@ def load_quantized_mesh_original(
         ) / (volume_resolution * 4 - 1)
         
     
-    mesh = o3d.io.read_triangle_mesh(mesh_path)
+    mesh = o3d.io.read_triangle_mesh(str(mesh_path))
     vertices = np.clip(np.asarray(mesh.vertices), -0.5 + 1e-6, 0.5 - 1e-6)
     faces = np.asarray(mesh.triangles)
     mesh.vertices = o3d.utility.Vector3dVector(vertices)
