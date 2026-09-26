@@ -1,5 +1,6 @@
 import inspect
 import math
+import os
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 import numpy as np
@@ -20,6 +21,7 @@ from ..inference_utils import hierarchical_extract_geometry, flash_extract_geome
 
 from ..models.autoencoders import TripoSGVAEModel
 from ..models.transformers import TripoSGDiTModel
+from ..schedulers.scheduling_rectified_flow import RectifiedFlowScheduler
 from .pipeline_triposg_output import TripoSGPipelineOutput
 from .pipeline_utils import TransformerDiffusionMixin
 
@@ -101,7 +103,7 @@ class TripoSGPipeline(DiffusionPipeline, TransformerDiffusionMixin):
         self,   
         vae: TripoSGVAEModel,
         transformer: TripoSGDiTModel,
-        scheduler: FlowMatchEulerDiscreteScheduler,
+        scheduler: Union[FlowMatchEulerDiscreteScheduler, RectifiedFlowScheduler],
         image_encoder_dinov2: Dinov2Model,
         feature_extractor_dinov2: BitImageProcessor,
     ):
@@ -114,6 +116,20 @@ class TripoSGPipeline(DiffusionPipeline, TransformerDiffusionMixin):
             image_encoder_dinov2=image_encoder_dinov2,
             feature_extractor_dinov2=feature_extractor_dinov2,
         )
+
+    @classmethod
+    def from_pretrained(cls, pretrained_model_name_or_path: Optional[Union[str, os.PathLike]], **kwargs):
+        if pretrained_model_name_or_path is not None and not os.path.isdir(str(pretrained_model_name_or_path)):
+            from huggingface_hub import snapshot_download
+            subfolder = kwargs.pop("subfolder", None)
+            local_dir = snapshot_download(
+                repo_id=str(pretrained_model_name_or_path),
+                revision=kwargs.get("revision"),
+                token=kwargs.get("token", kwargs.get("use_auth_token")),
+                cache_dir=kwargs.get("cache_dir"),
+            )
+            pretrained_model_name_or_path = os.path.join(local_dir, subfolder) if subfolder else local_dir
+        return super().from_pretrained(pretrained_model_name_or_path, **kwargs)
 
     @property
     def guidance_scale(self):

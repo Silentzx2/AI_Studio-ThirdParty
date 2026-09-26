@@ -1,9 +1,9 @@
 # Requires Python 3.10 and PyTorch 2.6.0+cu124 (present in active .venv)
 numpy>=1.26.4,<2.0.0
-diffusers
-transformers
+diffusers==0.30.3
+transformers>=4.44.0,<=4.46.3
 einops
-huggingface_hub
+huggingface_hub>=0.25.0,<=0.28.1
 opencv-python
 trimesh
 omegaconf
