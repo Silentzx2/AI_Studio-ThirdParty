@@ -1,0 +1,189 @@
+{
+  "baseline": {
+    "os": "linux-x86_64",
+    "python": "cp310 (Python 3.10)",
+    "pytorch": "2.6.0+cu124",
+    "cuda": "12.4",
+    "cxx11_abi": false,
+    "compiler": "GCC 12/13, NVCC 12.4"
+  },
+  "wheels": [
+    {
+      "name": "cubvh",
+      "version": "0.1.2",
+      "filename": "cubvh-0.1.2-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 6506742,
+      "shared_libraries": [
+        "_cubvh.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "cumesh",
+      "version": "0.0.1",
+      "filename": "cumesh-0.0.1-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 5294921,
+      "shared_libraries": [
+        "cumesh/_C.cpython-310-x86_64-linux-gnu.so",
+        "cumesh/_cubvh.cpython-310-x86_64-linux-gnu.so",
+        "cumesh/_xatlas.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "custom_rasterizer",
+      "version": "0.1",
+      "filename": "custom_rasterizer-0.1-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 4423461,
+      "shared_libraries": [
+        "custom_rasterizer_kernel.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "diff_gaussian_rasterization",
+      "version": "0.0.0",
+      "filename": "diff_gaussian_rasterization-0.0.0-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 3623807,
+      "shared_libraries": [
+        "diff_gaussian_rasterization/_C.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "diso",
+      "version": "0.1.4",
+      "filename": "diso-0.1.4-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 245984,
+      "shared_libraries": [
+        "diso/_C.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "flash_attn",
+      "version": "2.7.4.post1",
+      "filename": "flash_attn-2.7.4.post1+cu12torch2.6cxx11abiFALSE-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 187815087,
+      "shared_libraries": [
+        "flash_attn_2_cuda.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "fpsample",
+      "version": "0.3.3",
+      "filename": "fpsample-0.3.3-cp310-cp310-manylinux_2_28_x86_64.whl",
+      "size_bytes": 331963,
+      "shared_libraries": [
+        "fpsample/fpsample.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "hy3d_mesh_inpaint_processor",
+      "version": "0.1.0",
+      "filename": "hy3d_mesh_inpaint_processor-0.1.0-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 1296026,
+      "shared_libraries": [
+        "mesh_inpaint_processor.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "nvdiffrast",
+      "version": "0.4.0",
+      "filename": "nvdiffrast-0.4.0-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 16557668,
+      "shared_libraries": [
+        "_nvdiffrast_c.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "nvdiffrec_render",
+      "version": "0.0.0",
+      "filename": "nvdiffrec_render-0.0.0-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 1126814,
+      "shared_libraries": [
+        "nvdiffrec_render/renderutils/_C.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "o_voxel",
+      "version": "0.0.1",
+      "filename": "o_voxel-0.0.1-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 280851,
+      "shared_libraries": [
+        "o_voxel/_C.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "spconv-cu124",
+      "version": "2.3.8",
+      "filename": "spconv_cu124-2.3.8-cp310-cp310-manylinux_2_28_x86_64.whl",
+      "size_bytes": 69994269,
+      "shared_libraries": [
+        "spconv/core_cc.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "torch_scatter",
+      "version": "2.1.2",
+      "filename": "torch_scatter-2.1.2-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 8128074,
+      "shared_libraries": [
+        "torch_scatter/_scatter_cpu.so",
+        "torch_scatter/_scatter_cuda.so",
+        "torch_scatter/_segment_coo_cpu.so",
+        "torch_scatter/_segment_coo_cuda.so",
+        "torch_scatter/_segment_csr_cpu.so",
+        "torch_scatter/_segment_csr_cuda.so",
+        "torch_scatter/_version_cpu.so",
+        "torch_scatter/_version_cuda.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    },
+    {
+      "name": "torchmcubes",
+      "version": "0.1.0",
+      "filename": "torchmcubes-0.1.0-cp310-cp310-linux_x86_64.whl",
+      "size_bytes": 225652,
+      "shared_libraries": [
+        "torchmcubes_module.cpython-310-x86_64-linux-gnu.so"
+      ],
+      "python_tag": "cp310",
+      "pytorch_baseline": "2.6.0+cu124",
+      "cuda_baseline": "12.4"
+    }
+  ]
+}

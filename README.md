@@ -5,16 +5,16 @@
  </p>
 
 <h1 align="center">
-  AI Studio — Third-Party 3D AI Runtime
+  ForMash3D — Third-Party 3D AI Runtime
 </h1>
 
 <p align="center">
-  <strong>Curated 3D AI model sources and runtime dependencies used by AI Studio</strong><br>
+  <strong>Curated 3D AI model sources and runtime dependencies used by ForMash3D</strong><br>
   Neural 3D Generation • Shape Processing • UV • Rigging • Part Processing • Mesh Editing
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/AI%20Studio-ThirdParty-111111?style=for-the-badge" alt="AI Studio ThirdParty">
+  <img src="https://img.shields.io/badge/ForMash3D-ThirdParty-111111?style=for-the-badge" alt="ForMash3D ThirdParty">
   <img src="https://img.shields.io/badge/3D-AI%20Models-ff6a00?style=for-the-badge" alt="3D AI Models">
   <img src="https://img.shields.io/badge/CUDA-12.4-76b900?style=for-the-badge&logo=nvidia&logoColor=white" alt="CUDA 12.4">
   <img src="https://img.shields.io/badge/PyTorch-2.6.0-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch 2.6.0">
@@ -26,30 +26,30 @@
 
 ## Overview
 
-`AI_Studio-ThirdParty` is the dedicated third-party source repository used by the **AI Studio backend**.
+`ForMash3D-ThirdParty` is the dedicated third-party source repository used by the **ForMash3D backend**.
 
-It contains the external 3D AI model source trees required by the backend runtime. The repository is intentionally separated from the main AI Studio application so that the main application repository stays lightweight while the complete 3D model stack remains available as one versioned dependency bundle.
+It contains the external 3D AI model source trees required by the backend runtime. The repository is intentionally separated from the main ForMash3D application so that the main application repository stays lightweight while the complete 3D model stack remains available as one versioned dependency bundle.
 
-This repository is **not a standalone application**. It is consumed by AI Studio through:
+This repository is **not a standalone application**. It is consumed by ForMash3D through:
 
 ```text
-AI_Studio/
+ForMash3D/
 └── backend/
     └── thirdparty/
-        ├── TRELLIS/
-        ├── TRELLIS.2/
+        ├── FastMesh/
         ├── Hunyuan3D-2.1/
         ├── Hunyuan3DPart/
-        ├── UniRig/
-        ├── FastMesh/
-        ├── PartUV/
         ├── PartField/
         ├── PartPacker/
-        ├── UltraShape/
-        ├── VoxHammer/
+        ├── PartUV/
+        ├── TRELLIS/
+        ├── TRELLIS.2/
         ├── TripoSF/
         ├── TripoSG/
         ├── TripoSR/
+        ├── UltraShape/
+        ├── UniRig/
+        ├── VoxHammer/
         ├── ardy/
         └── wheels/
 ```
@@ -61,7 +61,7 @@ The main backend treats this repository as a **single Git submodule** at `backen
 
 # Why This Repository Exists
 
-AI Studio integrates multiple research-grade 3D systems with different build requirements, CUDA extensions, Python dependencies, model layouts, and inference contracts.
+ForMash3D integrates multiple research-grade 3D systems with different build requirements, CUDA extensions, Python dependencies, model layouts, and inference contracts.
 
 Keeping all of those source trees directly inside the main application repository would:
 
@@ -75,12 +75,12 @@ Keeping all of those source trees directly inside the main application repositor
 This repository solves that by providing one dedicated source bundle:
 
 ```text
-Main AI Studio Repo
+Main ForMash3D Repo
         │
         └── backend/thirdparty
                  │
                  ▼
-        AI_Studio-ThirdParty
+        ForMash3D-ThirdParty
                  │
        ┌─────────┼─────────┐
        ▼         ▼         ▼
@@ -148,50 +148,59 @@ Some model directories track upstream projects directly:
 nv-tlabs/PartField
 NVlabs/PartPacker
 PKU-YuanGroup/UltraShape-1.0
+VAST-AI-Research/TripoSF
+VAST-AI-Research/TripoSG
+VAST-AI-Research/TripoSR
+NVlabs/ardy
 ```
 
-The exact repository revision consumed by AI Studio is determined by the version stored in this dependency bundle and by the parent backend's submodule pointer.
+The exact repository revision consumed by ForMash3D is determined by the version stored in this dependency bundle and by the parent backend's submodule pointer.
 
 ---
 
 # Repository Structure
 
 ```text
-AI_Studio-ThirdParty/
+ForMash3D-ThirdParty/
 │
-├── TRELLIS/
-├── TRELLIS.2/
+├── FastMesh/
 ├── Hunyuan3D-2.1/
 ├── Hunyuan3DPart/
-├── UniRig/
-├── FastMesh/
-├── PartUV/
 ├── PartField/
 ├── PartPacker/
+├── PartUV/
+├── TRELLIS/
+├── TRELLIS.2/
+├── TripoSF/
+├── TripoSG/
+├── TripoSR/
 ├── UltraShape/
-└── VoxHammer/
+├── UniRig/
+├── VoxHammer/
+├── ardy/
+└── wheels/
 ```
 
-The directories above are the model source bundle consumed by the AI Studio backend.
+The directories above are the model source bundle consumed by the ForMash3D backend.
 
 Large model checkpoints are intentionally treated separately from the source repository whenever possible.
 
 ---
 
-# Integration With AI Studio
+# Integration With ForMash3D
 
-The main AI Studio backend references this repository as one Git submodule:
+The main ForMash3D backend references this repository as one Git submodule:
 
 ```ini
 [submodule "thirdparty"]
-    path = thirdparty
-    url = https://github.com/Silentzx2/AI_Studio-ThirdParty.git
+    path = backend/thirdparty
+    url = https://github.com/Silentzx2/ForMash3D-ThirdParty.git
 ```
 
 The resulting application layout is:
 
 ```text
-AI_Studio/
+ForMash3D/
 ├── frontend / app code
 ├── backend/
 │   ├── app/
@@ -207,10 +216,10 @@ This design gives two useful checkout modes.
 
 # Clone Behavior
 
-## Normal AI Studio clone
+## Normal ForMash3D clone
 
 ```bash
-git clone https://github.com/Silentzx2/AI_Studio.git
+git clone https://github.com/Silentzx2/ForMash3D.git
 ```
 
 This clones the main project without initializing the `backend/thirdparty` submodule.
@@ -219,36 +228,41 @@ The checkout remains lightweight.
 
 The `thirdparty` path may exist as the registered submodule path, but the model source tree is not populated until the submodule is initialized.
 
-## Recursive AI Studio clone
+## Recursive ForMash3D clone
 
 ```bash
-git clone --recurse-submodules https://github.com/Silentzx2/AI_Studio.git
+git clone --recurse-submodules https://github.com/Silentzx2/ForMash3D.git
 ```
 
-This initializes the backend's `thirdparty` submodule automatically and downloads the complete `AI_Studio-ThirdParty` source bundle.
+This initializes the backend's `thirdparty` submodule automatically and downloads the complete `ForMash3D-ThirdParty` source bundle.
 
 The resulting structure is:
 
 ```text
-AI_Studio/
+ForMash3D/
 └── backend/
     └── thirdparty/
-        ├── TRELLIS/
-        ├── TRELLIS.2/
+        ├── FastMesh/
         ├── Hunyuan3D-2.1/
         ├── Hunyuan3DPart/
-        ├── UniRig/
-        ├── FastMesh/
-        ├── PartUV/
         ├── PartField/
         ├── PartPacker/
+        ├── PartUV/
+        ├── TRELLIS/
+        ├── TRELLIS.2/
+        ├── TripoSF/
+        ├── TripoSG/
+        ├── TripoSR/
         ├── UltraShape/
-        └── VoxHammer/
+        ├── UniRig/
+        ├── VoxHammer/
+        ├── ardy/
+        └── wheels/
 ```
 
 ## Existing checkout
 
-If the AI Studio backend was cloned normally, initialize the dependency bundle with:
+If the ForMash3D backend was cloned normally, initialize the dependency bundle with:
 
 ```bash
 git -C ./backend submodule update --init --recursive
@@ -286,7 +300,7 @@ Do **not** put `git submodule add` into the setup script.
 # Runtime Architecture
 
 ```text
-                         AI Studio
+                         ForMash3D
                              │
                              ▼
                       FastAPI Backend
@@ -309,7 +323,7 @@ Do **not** put `git submodule add` into the setup script.
                          NVIDIA GPU
 ```
 
-AI Studio remains responsible for application orchestration, API contracts, job execution, storage, runtime state, model selection, telemetry, and user-facing workflows.
+ForMash3D remains responsible for application orchestration, API contracts, job execution, storage, runtime state, model selection, telemetry, and user-facing workflows.
 
 This repository provides the external model source trees required by that runtime.
 
@@ -377,7 +391,7 @@ To eliminate hours of complex, error-prone C++/CUDA compilation during setup, th
 | `cumesh` | `0.0.1` | CUDA mesh data structures and operations |
 | `diso` | `0.1.4` | Differentiable Isosurfacing |
 | `torch_scatter` | `2.1.2` | PyTorch scatter operations |
-| `torchmcubes` | `0.1.0` | Marching cubes GPU implementation |
+| `torchmcubes` | `0.1.0` | Marching cubes GPU implementation (rebuilt for PyTorch 2.6.0+cu124, CUDA 12.4, CXX11 ABI False) |
 | `fpsample` | `0.3.3` | Farthest Point Sampling |
 | `o_voxel` | `0.0.1` | Octree voxel operations (TRELLIS.2) |
 | `custom_rasterizer` | `0.1` | Custom rasterization kernels |
@@ -388,8 +402,8 @@ To eliminate hours of complex, error-prone C++/CUDA compilation during setup, th
 1. **Clone with Git LFS enabled** (mandatory):
    ```bash
    git lfs install
-   git clone https://github.com/Silentzx2/AI_Studio-ThirdParty.git
-   cd AI_Studio-ThirdParty/wheels
+   git clone https://github.com/Silentzx2/ForMash3D-ThirdParty.git
+   cd ForMash3D-ThirdParty/wheels
    ```
 
 2. **Install all wheels into your Python 3.10 environment**:
@@ -424,7 +438,7 @@ To eliminate hours of complex, error-prone C++/CUDA compilation during setup, th
 
 This repository is primarily for **model source code and integration code**.
 
-Large pretrained weights should normally be stored or downloaded separately through the AI Studio runtime/model-storage mechanism.
+Large pretrained weights should normally be stored or downloaded separately through the ForMash3D runtime/model-storage mechanism.
 
 Common model-weight formats include:
 
@@ -459,20 +473,20 @@ Depending on the target model, the environment may require:
 
 Not every model has the same VRAM, compiler, or dependency requirements.
 
-For reproducible builds, install the model using the dependency instructions associated with its directory and the AI Studio backend's runtime configuration.
+For reproducible builds, install the model using the dependency instructions associated with its directory and the ForMash3D backend's runtime configuration.
 
 ---
 
 # Recommended Installation Flow
 
 ```text
-1. Clone AI Studio
+1. Clone ForMash3D
         │
         ▼
 2. Initialize backend/thirdparty
         │
         ▼
-3. AI_Studio-ThirdParty is checked out
+3. ForMash3D-ThirdParty is checked out
         │
         ▼
 4. Prepare model-specific Python environments
@@ -499,7 +513,7 @@ For reproducible builds, install the model using the dependency instructions ass
 
 ## TRELLIS
 
-Used for neural 3D generation and structured mesh reconstruction. The AI Studio integration uses the FishWoWater-maintained repository rather than assuming a random upstream revision.
+Used for neural 3D generation and structured mesh reconstruction. The ForMash3D integration uses the FishWoWater-maintained repository rather than assuming a random upstream revision.
 
 ## TRELLIS.2
 
@@ -507,7 +521,7 @@ Used for newer/high-quality 3D generation workflows and as part of the broader d
 
 ## Hunyuan3D-2.1
 
-Provides shape-generation and texture-related capabilities used in AI Studio's 3D generation workflows.
+Provides shape-generation and texture-related capabilities used in ForMash3D's 3D generation workflows.
 
 ## Hunyuan3DPart
 
@@ -541,11 +555,27 @@ Provides shape refinement/reconstruction capabilities.
 
 Provides 3D editing and voxel/mesh processing capabilities used by the broader editing pipeline.
 
+## TripoSR
+
+Provides fast feedforward single-image 3D reconstruction with GPU-accelerated marching cubes isosurface extraction.
+
+## TripoSG
+
+Provides rectified flow image-to-3D shape generation with DiT and Dinov2 image encoder conditioning.
+
+## TripoSF
+
+Provides high-resolution sparse voxel 3D shape generation.
+
+## ardy
+
+Provides autoregressive diffusion for interactive motion generation.
+
 ---
 
 # Versioning Policy
 
-Treat this repository as a versioned runtime dependency of AI Studio.
+Treat this repository as a versioned runtime dependency of ForMash3D.
 
 Do not randomly update model sources.
 
@@ -563,7 +593,7 @@ A model update can affect:
 - backend adapters
 - generated asset compatibility
 
-When a known-good state is established, update the AI Studio backend's submodule pointer to that exact commit.
+When a known-good state is established, update the ForMash3D backend's submodule pointer to that exact commit.
 
 ---
 
@@ -584,7 +614,7 @@ git commit -m "Update third-party model sources"
 git push
 ```
 
-Then update the AI Studio backend repository so its `backend/thirdparty` submodule points to the tested commit.
+Then update the ForMash3D backend repository so its `backend/thirdparty` submodule points to the tested commit.
 
 ---
 
@@ -592,7 +622,7 @@ Then update the AI Studio backend repository so its `backend/thirdparty` submodu
 
 ## Thirdparty directory is empty
 
-From the AI Studio project root:
+From the ForMash3D project root:
 
 ```bash
 git -C ./backend submodule update --init --recursive
@@ -693,7 +723,7 @@ private access tokens
 database passwords
 ```
 
-Use environment variables or the AI Studio runtime configuration system instead.
+Use environment variables or the ForMash3D runtime configuration system instead.
 
 ---
 
@@ -707,14 +737,14 @@ When modifying a model directory:
 4. Keep CUDA/native build requirements explicit.
 5. Validate imports after native dependency changes.
 6. Run a real inference/smoke test after significant dependency changes.
-7. Update the parent AI Studio submodule only after validation.
+7. Update the parent ForMash3D submodule only after validation.
 
 ---
 
-# Relationship to AI Studio
+# Relationship to ForMash3D
 
 ```text
-AI Studio
+ForMash3D
 │
 ├── frontend / product UI
 │
@@ -723,14 +753,14 @@ AI Studio
 │   ├── workers
 │   ├── runtime manager
 │   ├── model adapters
-│   └── thirdparty  ──────────► AI_Studio-ThirdParty
+│   └── thirdparty  ──────────► ForMash3D-ThirdParty
 │
 └── setup / deployment scripts
 ```
 
 The separation provides a clear ownership boundary:
 
-**AI Studio**
+**ForMash3D**
 
 - Application UI
 - API contracts
@@ -740,7 +770,7 @@ The separation provides a clear ownership boundary:
 - Telemetry
 - Asset delivery
 
-**AI_Studio-ThirdParty**
+**ForMash3D-ThirdParty**
 
 - External 3D AI model source trees
 - Model-specific integration source
@@ -751,20 +781,20 @@ The separation provides a clear ownership boundary:
 
 # Current Repository
 
-**Repository:** `AI_Studio-ThirdParty`
+**Repository:** `ForMash3D-ThirdParty`
 
 **GitHub:**
 
 ```text
-https://github.com/Silentzx2/AI_Studio-ThirdParty
+https://github.com/Silentzx2/ForMash3D-ThirdParty
 ```
 
-**Primary consumer:** AI Studio backend
+**Primary consumer:** ForMash3D backend
 
 **Integration path:**
 
 ```text
-AI_Studio/backend/thirdparty
+ForMash3D/backend/thirdparty
 ```
 
 **Delivery mechanism:** Git submodule
@@ -784,7 +814,7 @@ AI_Studio/backend/thirdparty
 ### Clone this repository directly
 
 ```bash
-git clone https://github.com/Silentzx2/AI_Studio-ThirdParty.git
+git clone https://github.com/Silentzx2/ForMash3D-ThirdParty.git
 ```
 
 ### Update this repository
@@ -793,7 +823,7 @@ git clone https://github.com/Silentzx2/AI_Studio-ThirdParty.git
 git pull
 ```
 
-### Initialize it from AI Studio
+### Initialize it from ForMash3D
 
 ```bash
 git -C ./backend submodule update --init --recursive
@@ -816,14 +846,19 @@ PartPacker
 PartUV
 TRELLIS
 TRELLIS.2
+TripoSF
+TripoSG
+TripoSR
 UltraShape
 UniRig
 VoxHammer
+ardy
+wheels
 ```
 
 ---
 
 <p align="center">
-  <strong>AI Studio — 3D AI Runtime Stack</strong><br>
+  <strong>ForMash3D — 3D AI Runtime Stack</strong><br>
   <sub>One backend. One dependency bundle. Reproducible model environments.</sub>
 </p>

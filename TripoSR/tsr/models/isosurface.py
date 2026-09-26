@@ -3,7 +3,10 @@ from typing import Callable, Optional, Tuple
 import numpy as np
 import torch
 import torch.nn as nn
-from torchmcubes import marching_cubes
+try:
+    from torchmcubes import marching_cubes
+except ImportError:
+    marching_cubes = None
 
 
 class IsosurfaceHelper(nn.Module):
@@ -18,7 +21,7 @@ class MarchingCubeHelper(IsosurfaceHelper):
     def __init__(self, resolution: int) -> None:
         super().__init__()
         self.resolution = resolution
-        self.mc_func: Callable = marching_cubes
+        self.mc_func: Optional[Callable] = marching_cubes
         self._grid_vertices: Optional[torch.FloatTensor] = None
 
     @property
@@ -41,11 +44,15 @@ class MarchingCubeHelper(IsosurfaceHelper):
         self,
         level: torch.FloatTensor,
     ) -> Tuple[torch.FloatTensor, torch.LongTensor]:
+        if self.mc_func is None:
+            raise ImportError(
+                "torchmcubes is not installed. Please install torchmcubes from the wheels directory."
+            )
         level = -level.view(self.resolution, self.resolution, self.resolution)
         try:
             v_pos, t_pos_idx = self.mc_func(level.detach(), 0.0)
-        except AttributeError:
-            print("torchmcubes was not compiled with CUDA support, use CPU version instead.")
+        except (AttributeError, RuntimeError):
+            print("torchmcubes CUDA execution failed or not compiled with CUDA support, use CPU version instead.")
             v_pos, t_pos_idx = self.mc_func(level.detach().cpu(), 0.0)
         v_pos = v_pos[..., [2, 1, 0]]
         v_pos = v_pos / (self.resolution - 1.0)
